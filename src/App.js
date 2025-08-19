@@ -16,7 +16,7 @@ export default function App() {
             rel="noreferrer"
           >
             open-sourced on GitHub
-          </a>
+          </a>{" "}
           and hosted on{" "}
           <a
             href="https://kerstin-weather-react.netlify.app/"

@@ -1,6 +1,7 @@
 import React from "react";
 import FriendlyDate from "./FriendlyDate";
 import WeatherTemperature from "./WeatherTemperature";
+import WeatherIcon from "./WeatherIcon";
 export default function WeatherInfo(props) {
     return (
       <div className="WeatherInfo">
@@ -14,14 +15,15 @@ export default function WeatherInfo(props) {
         <div className="row mt-3">
           <div className="col-6">
             <div style={{ display: "flex", alignItems: "center" }}>
-              <img
-                src={props.data.icon}
-                alt={props.data.description}
+              <WeatherIcon
+                code={props.data.icon}
+                size={52}
                 style={{ marginRight: "10px" }}
+            
               />
+
               <div>
                 <WeatherTemperature celsius={props.data.temperature} />
-                
               </div>
             </div>
           </div>
