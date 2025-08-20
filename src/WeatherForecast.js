@@ -1,14 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import WeatherIcon from "./WeatherIcon";
+import WeatherForecastDay from "./WeatherForecastDay";
 import "./WeatherForecast.css";
 import axios from "axios";
 
 
 export default function WeatherForecast(props) {
-  function handleResponse(response) {
-    console.log(response.data);
-  }
+  let [loaded, setLoaded] = useState(false);
+  let [forecast, setForecast] = useState(null);
 
+  function handleResponse(response) {
+    
+    setForecast(response.data.daily);
+    setLoaded(true);
+  }
+  if (loaded) {
+    return (
+      <div className="WeatherForecast">
+        <div className="row">
+          <div className="col">
+            <WeatherForecastDay data={forecast[0]} />
+          </div>
+        </div>
+      </div>
+    );
+  } else {
     let apiKey = "0c43aab85t9fo6a6712276a1886b3109";
     let longitude = props.coordinates.longitude;
     let latitude = props.coordinates.latitude;
@@ -16,50 +32,11 @@ export default function WeatherForecast(props) {
 
     axios.get(apiUrl).then(handleResponse);
 
-    return (
-      <div className="WeatherForecast">
-        <div className="row">
-          <div className="col">
-            <div className="WeatherForecast-day">Thu</div>
-            <WeatherIcon code="clear-sky-night" size={36} />
-            <div className="WeatherForecast-temperatures">
-              <span className="WeatherForecast-temperature-max">19°</span>
-              <span className="WeatherForecast-temperature-min">10°</span>
-            </div>
-          </div>
-          <div className="col">
-            <div className="WeatherForecast-day">Thu</div>
-            <WeatherIcon code="clear-sky-night" size={36} />
-            <div className="WeatherForecast-temperatures">
-              <span className="WeatherForecast-temperature-max">19°</span>
-              <span className="WeatherForecast-temperature-min">10°</span>
-            </div>
-          </div>
-          <div className="col">
-            <div className="WeatherForecast-day">Thu</div>
-            <WeatherIcon code="clear-sky-night" size={36} />
-            <div className="WeatherForecast-temperatures">
-              <span className="WeatherForecast-temperature-max">19°</span>
-              <span className="WeatherForecast-temperature-min">10°</span>
-            </div>
-          </div>
-          <div className="col">
-            <div className="WeatherForecast-day">Thu</div>
-            <WeatherIcon code="clear-sky-night" size={36} />
-            <div className="WeatherForecast-temperatures">
-              <span className="WeatherForecast-temperature-max">19°</span>
-              <span className="WeatherForecast-temperature-min">10°</span>
-            </div>
-          </div>
-          <div className="col">
-            <div className="WeatherForecast-day">Thu</div>
-            <WeatherIcon code="clear-sky-night" size={36} />
-            <div className="WeatherForecast-temperatures">
-              <span className="WeatherForecast-temperature-max">19°</span>
-              <span className="WeatherForecast-temperature-min">10°</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+    return null;
+
+  }
+
+    
+
+    
 }
