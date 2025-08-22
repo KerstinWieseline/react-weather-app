@@ -21,22 +21,19 @@ export default function WeatherForecast(props) {
     setLoaded(true);
   }
   if (loaded) {
-    console.log("Loaded: " + loaded);
-    console.log("Long: " + props.coordinates.longitude);
-    console.log("Lat: " + props.coordinates.latitude);
+    
     return (
       <div className="WeatherForecast">
         <div className="row">
-          {forecast.map(function (dailyForecast, index) {
-            if (index < 5) {
+          {forecast.slice(1, 6).map(function (dailyForecast, index) {
+            
               return (
                 <div className="col" key={index}>
                   <WeatherForecastDay data={dailyForecast} />
                 </div>
               );
 
-            }
-            
+                     
           })}
           
           
